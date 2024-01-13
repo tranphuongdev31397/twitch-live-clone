@@ -1,8 +1,5 @@
-import * as React from "react";
 import { Logo } from "./logo";
-import { UserButton } from "@clerk/nextjs";
-import { BROWSE_ROUTES } from "@/routes/browse";
-import Search from "@/components/app-components/search";
+import Search from "@/components/client/search";
 import Actions from "./actions";
 
 export interface NavbarProps {}

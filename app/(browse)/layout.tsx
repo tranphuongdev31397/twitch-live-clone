@@ -9,7 +9,7 @@ export default function BrowseLayout({ children }: BrowseLayoutProps) {
   return (
     <>
       <Navbar />
-      {children}
+      <div className="flex pt-20 h-full">{children}</div>
     </>
   );
 }
