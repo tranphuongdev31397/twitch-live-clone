@@ -1,5 +1,5 @@
 import * as React from "react";
-import Navbar from "./(home)/_component/Navbar";
+import Navbar from "./_component/navbar";
 
 export interface BrowseLayoutProps {
   children: React.ReactNode;
