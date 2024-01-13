@@ -1,11 +1,11 @@
-import * as React from 'react';
-import Navbar from './(home)/_component/Navbar';
+import * as React from "react";
+import Navbar from "./(home)/_component/Navbar";
 
 export interface BrowseLayoutProps {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
-export default function BrowseLayout ({children}: BrowseLayoutProps) {
+export default function BrowseLayout({ children }: BrowseLayoutProps) {
   return (
     <>
       <Navbar />
