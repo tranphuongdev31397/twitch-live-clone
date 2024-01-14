@@ -77,7 +77,7 @@ export async function POST(req: Request) {
       break;
 
     default:
-      return new Response("Event type not found", {status: 404})
+      return new Response("Event type not found", { status: 404 });
   }
 
   return new Response("", { status: 200 });

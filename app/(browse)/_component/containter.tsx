@@ -21,7 +21,12 @@ export default function Container({ children }: ContainerProps) {
   }, [matches, onTrigger]);
 
   return (
-    <div className={cn("", collapsed ? "ml-[70px]" : "ml-[70px] lg:ml-60")}>
+    <div
+      className={cn(
+        "",
+        collapsed ? "ml-min-sidebar" : "ml-min-sidebar lg:ml-max-sidebar"
+      )}
+    >
       {children}
     </div>
   );

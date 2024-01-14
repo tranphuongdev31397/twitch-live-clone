@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import type { CreateUserParams } from "../types/User.types";
 import { User } from "@prisma/client";
+import AuthService from "./auth.service";
 
 class UserService {
   static async createUser({
@@ -27,14 +28,23 @@ class UserService {
       data: {
         username,
         imageUrl,
-      }
+      },
     });
   }
 
-  static async deleteUser (externalUserId : string) {
+  static async deleteUser(externalUserId: string) {
     return await db.user.delete({
-        where: {  externalUserId  }
-    })
+      where: { externalUserId },
+    });
+  }
+
+  static async recommendUsers() {
+    // const self = await AuthService.getSelf();
+    return await db.user.findMany({
+      orderBy: {
+        createAt: "desc",
+      },
+    });
   }
 }
 
