@@ -12,7 +12,7 @@ export default function Wrapper({ children }: WrapperProps) {
   return (
     <aside
       className={cn(
-        "fixed w-max-sidebar z-50 flex flex-col left-0 h-full bg-background border-r border-[#2d2e35]  transition-all duration-500 sidebar-root",
+        "fixed w-max-sidebar  z-50 flex flex-col left-0 h-full bg-background border-r border-[#2d2e35]  transition-all duration-500 sidebar-root",
         collapsed && "w-min-sidebar"
       )}
     >

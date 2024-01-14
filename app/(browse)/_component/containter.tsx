@@ -23,7 +23,7 @@ export default function Container({ children }: ContainerProps) {
   return (
     <div
       className={cn(
-        "",
+        "transition-all duration-500",
         collapsed ? "ml-min-sidebar" : "ml-min-sidebar lg:ml-max-sidebar"
       )}
     >

@@ -6,16 +6,18 @@ import { cn } from "@/lib/utils";
 import { useSidebar } from "@/store";
 import { ArrowLeftFromLine, ExpandIcon } from "lucide-react";
 
-export interface ToggleProps {}
+export interface ToggleProps {
+  isLogin?: boolean;
+}
 
-export default function Toggle(props: ToggleProps) {
+export default function Toggle({ isLogin }: ToggleProps) {
   const { collapsed, onToggle } = useSidebar((state) => state);
 
   return (
-    <div className="p-3 p-l6 flex flex-row justify-between items-center gap-x-4">
-      {!collapsed && <p>For you</p>}
+    <div className="p-3 flex flex-row justify-between items-center gap-x-4">
+      {!collapsed && <p className="font-semibold text-sm truncate">For You</p>}
       <Hint label={collapsed ? "Expand" : "Collapse"} side="right" asChild>
-        <Button className="hidden lg:block" variant="ghost" onClick={onToggle}>
+        <Button className="hidden lg:block " variant="ghost" onClick={onToggle}>
           <ArrowLeftFromLine
             className={cn(
               "transition-transform duration-300",
