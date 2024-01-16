@@ -4,6 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import BadgeLive from "./badge-live";
 import { useSidebar } from "@/store";
+import { Skeleton } from "../ui/skeleton";
 
 const avatarVariants = cva("", {
   variants: {
@@ -18,19 +19,19 @@ const avatarVariants = cva("", {
   },
 });
 
-export interface UserAvatarProps
-  extends UserItemProps,
-    VariantProps<typeof avatarVariants> {
+export interface UserAvatarProps extends UserItemProps {
   showBadge?: boolean;
+  className?: string;
 }
 
-export default function UserAvatar({
+export function UserAvatar({
   username,
   imageUrl,
   isLive,
   showBadge,
   size,
-}: UserAvatarProps) {
+  className,
+}: UserAvatarProps & VariantProps<typeof avatarVariants>) {
   const showLive = showBadge && isLive;
   const { collapsed } = useSidebar((state) => state);
   return (
@@ -38,7 +39,8 @@ export default function UserAvatar({
       <Avatar
         className={cn(
           isLive && "ring-2 ring-rose-500  border border-background",
-          avatarVariants({ size })
+          avatarVariants({ size }),
+          className
         )}
       >
         <AvatarImage src={imageUrl} className="object-cover" />
@@ -58,5 +60,16 @@ export default function UserAvatar({
         </div>
       )}
     </div>
+  );
+}
+
+export function UserAvatarSkeleton({
+  size,
+  className,
+}: VariantProps<typeof avatarVariants> & { className?: string }) {
+  return (
+    <Skeleton
+      className={cn("rounded-full", avatarVariants({ size }), className)}
+    />
   );
 }

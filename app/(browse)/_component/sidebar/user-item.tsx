@@ -1,6 +1,10 @@
 import BadgeLive from "@/components/client/badge-live";
-import UserAvatar from "@/components/client/user-avatar";
+import {
+  UserAvatar,
+  UserAvatarSkeleton,
+} from "@/components/client/user-avatar";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/store";
 import Link from "next/link";
@@ -48,10 +52,21 @@ export default function UserItem({
             isLive={isLive}
             showBadge
           />
-          {!collapsed && <p className="truncate"> {username} </p>}
+          {!collapsed && <p className="truncate flex-1"> {username} </p>}
           {!collapsed && isLive && <BadgeLive className="ml-auto" />}
         </div>
       </Link>
     </Button>
+  );
+}
+
+export function UserItemSkeleton() {
+  return (
+    <li
+      className={cn("flex max-lg:justify-center items-center w-full gap-x-4")}
+    >
+      <UserAvatarSkeleton />
+      <Skeleton className="max-lg:hidden h-6 w-full truncate flex-1" />
+    </li>
   );
 }

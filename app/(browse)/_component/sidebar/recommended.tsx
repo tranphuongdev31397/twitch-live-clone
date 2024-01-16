@@ -3,7 +3,8 @@ import Hint from "@/components/client/hint";
 import { useSidebar } from "@/store";
 import { User } from "@prisma/client";
 import { VideoIcon } from "lucide-react";
-import UserItem from "./user-item";
+import UserItem, { UserItemSkeleton } from "./user-item";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface RecommendedProps {
   data: User[];
@@ -34,6 +35,19 @@ export default function Recommended({ data }: RecommendedProps) {
             isLive={true}
             imageUrl={user.imageUrl}
           />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export function RecommendSkeleton() {
+  return (
+    <div className="flex flex-col max-lg:items-center p-3">
+      <Skeleton className="h-8 w-8 max-lg:rounded-md lg:w-48" />
+      <ul className="space-y-2 py-2">
+        {[...Array(3)].map((_, i) => (
+          <UserItemSkeleton key={i} />
         ))}
       </ul>
     </div>

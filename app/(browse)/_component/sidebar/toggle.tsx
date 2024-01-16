@@ -2,6 +2,7 @@
 
 import Hint from "@/components/client/hint";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/store";
 import { ArrowLeftFromLine, ExpandIcon } from "lucide-react";
@@ -27,6 +28,15 @@ export default function Toggle({ isLogin }: ToggleProps) {
           />
         </Button>
       </Hint>
+    </div>
+  );
+}
+
+export function ToggleSkeleton() {
+  return (
+    <div className="p-3 flex flex-row justify-between items-center gap-x-4">
+      <Skeleton className="hidden h-6 w-12 lg:block font-semibold text-sm truncate" />
+      <Skeleton className="hidden lg:block h-8 w-8 rounded-md" />
     </div>
   );
 }
