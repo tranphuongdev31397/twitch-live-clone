@@ -39,12 +39,35 @@ class UserService {
   }
 
   static async recommendUsers() {
-    // const self = await AuthService.getSelf();
-    return await db.user.findMany({
-      orderBy: {
-        createAt: "desc",
-      },
-    });
+    let userId;
+    try {
+      const self = await AuthService.getSelf();
+      userId = self.id;
+    } catch (error) {
+      userId = null;
+    }
+
+    let users = [];
+    if (userId) {
+      users = await db.user.findMany({
+        where: {
+          NOT: {
+            id: userId,
+          },
+        },
+        orderBy: {
+          createAt: "desc",
+        },
+      });
+    } else {
+      users = await db.user.findMany({
+        orderBy: {
+          createAt: "desc",
+        },
+      });
+    }
+
+    return users;
   }
 }
 

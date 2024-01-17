@@ -5,14 +5,14 @@ class AuthService {
   static async getSelf() {
     const self = await currentUser();
 
-    if (!self || !self.username || !self.externalId) {
+    if (!self || !self.username || !self.id) {
       throw new Error("Unauthorized");
     }
 
     const user = await db.user.findUnique({
       where: {
         username: self.username,
-        id: self.externalId,
+        externalUserId: self.id,
       },
     });
 
