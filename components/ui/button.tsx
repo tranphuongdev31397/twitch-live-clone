@@ -1,8 +1,9 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+import { LucideIcon, SwordsIcon } from "lucide-react";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -31,26 +32,70 @@ const buttonVariants = cva(
       size: "default",
     },
   }
-)
+);
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+  asChild?: boolean;
+  loading?: boolean;
+  startIcon?: LucideIcon;
+  endIcon?: LucideIcon;
+  loadingPosition?: "start" | "end";
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      loading,
+      startIcon,
+      endIcon,
+      disabled,
+      loadingPosition = "start",
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const Comp = asChild ? Slot : "button";
+
+    const renderIcon = (icon: LucideIcon) => {
+      let Icon = icon;
+
+      if (loadingPosition) {
+        Icon = SwordsIcon;
+      }
+
+      return <Icon size={16} />;
+    };
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        disabled={disabled || loading}
         {...props}
-      />
-    )
+      >
+        <div className="flex flex-row items-center gap-x-2">
+          {startIcon && renderIcon(startIcon)}
+          {loading &&
+            loadingPosition === "start" &&
+            !startIcon &&
+            renderIcon(SwordsIcon)}
+          <div className="label">{children}</div>
+          {loading &&
+            loadingPosition === "end" &&
+            !endIcon &&
+            renderIcon(SwordsIcon)}
+          {endIcon && renderIcon(endIcon)}
+        </div>
+      </Comp>
+    );
   }
-)
-Button.displayName = "Button"
+);
+Button.displayName = "Button";
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };
