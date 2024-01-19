@@ -3,7 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
-import { LucideIcon, SwordsIcon } from "lucide-react";
+import { LucideIcon, LucideProps, SwordIcon } from "lucide-react";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -33,15 +33,30 @@ const buttonVariants = cva(
     },
   }
 );
+const iconVariants = cva("", {
+  variants: {
+    iconSize: {
+      default: "h-5 w-5",
+      sm: "h-2 w-2",
+      lg: "h-6 w-6",
+      lucide: "",
+    },
+  },
+  defaultVariants: {
+    iconSize: "default",
+  },
+});
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+    VariantProps<typeof buttonVariants>,
+    VariantProps<typeof iconVariants> {
   asChild?: boolean;
   loading?: boolean;
   startIcon?: LucideIcon;
   endIcon?: LucideIcon;
   loadingPosition?: "start" | "end";
+  iconProps?: LucideProps;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -50,6 +65,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       variant,
       size,
+      iconSize,
       asChild = false,
       loading,
       startIcon,
@@ -57,21 +73,31 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled,
       loadingPosition = "start",
       children,
+      iconProps,
       ...props
     },
     ref
   ) => {
     const Comp = asChild ? Slot : "button";
 
-    const renderIcon = (icon: LucideIcon) => {
+    const renderIcon = (icon: LucideIcon, isLoading: boolean = false) => {
       let Icon = icon;
-
-      if (loadingPosition) {
-        Icon = SwordsIcon;
-      }
-
-      return <Icon size={16} />;
+      const { className, ...restIcon } = iconProps || {};
+      return (
+        <Icon
+          className={cn(
+            {
+              "animate-spin": isLoading,
+            },
+            iconVariants({ iconSize }),
+            className
+          )}
+          {...restIcon}
+        />
+      );
     };
+    const startLoading = loading && loadingPosition === "start" && !startIcon;
+    const endLoading = loading && loadingPosition === "end" && !endIcon;
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
@@ -81,15 +107,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         <div className="flex flex-row items-center gap-x-2">
           {startIcon && renderIcon(startIcon)}
-          {loading &&
-            loadingPosition === "start" &&
-            !startIcon &&
-            renderIcon(SwordsIcon)}
-          <div className="label">{children}</div>
-          {loading &&
-            loadingPosition === "end" &&
-            !endIcon &&
-            renderIcon(SwordsIcon)}
+          {startLoading && renderIcon(SwordIcon, startLoading)}
+          {children}
+          {endLoading && !endIcon && renderIcon(SwordIcon, endLoading)}
           {endIcon && renderIcon(endIcon)}
         </div>
       </Comp>
