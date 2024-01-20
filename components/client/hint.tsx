@@ -9,8 +9,10 @@ export interface HintProps {
   label: React.ReactNode;
   children: React.ReactNode;
   asChild?: boolean;
+  disabled?: boolean;
   side?: "top" | "bottom" | "right" | "left";
   align?: "start" | "end" | "center";
+  className?: string;
 }
 
 export default function Hint({
@@ -18,14 +20,22 @@ export default function Hint({
   children,
   side = "top",
   align = "center",
+  disabled = true,
   asChild,
+  className,
 }: HintProps) {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={0}>
-        <TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
+        <TooltipTrigger
+          className={className}
+          disabled={disabled}
+          asChild={asChild}
+        >
+          {children}
+        </TooltipTrigger>
         <TooltipContent
-          className="text-black bg-white"
+          className="text-black bg-white border-transparent"
           side={side}
           align={align}
         >

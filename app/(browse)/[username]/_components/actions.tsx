@@ -1,9 +1,11 @@
 "use client";
 
 import { onFollow, onUnFollow } from "@/actions/follow";
+import Hint from "@/components/client/hint";
 import { Button } from "@/components/ui/button";
-import { PanelsTopLeftIcon } from "lucide-react";
-import { useTransition } from "react";
+import { useUser } from "@clerk/nextjs";
+import { useParams } from "next/navigation";
+import { Fragment, useTransition } from "react";
 import { toast } from "sonner";
 
 export interface ActionsProps {
@@ -16,6 +18,9 @@ export default function Actions({ isFollowing, userId }: ActionsProps) {
 
   const [isPending, startTransition] = useTransition();
 
+  const { user } = useUser();
+
+  const { username } = useParams();
   const handleFollow = () => {
     startTransition(() => {
       onFollow(userId)
@@ -39,17 +44,30 @@ export default function Actions({ isFollowing, userId }: ActionsProps) {
     }
   };
 
+  if (!user) {
+    return null;
+  }
+
+  const ElementWrapper = user.username === username ? Hint : Fragment;
+
   return (
-    <Button
-      className="font-semibold text-xs"
-      onClick={handleOnClick}
-      loading={isPending}
-      iconSize={"lucide"}
-      iconProps={{
-        size: 16,
-      }}
+    <ElementWrapper
+      side="bottom"
+      label={"Can't follow yourself"}
+      className="w-full"
     >
-      {labelFollow}
-    </Button>
+      <Button
+        className="font-semibold text-xs w-full"
+        onClick={handleOnClick}
+        loading={isPending}
+        iconSize={"lucide"}
+        disabled={user.username === username}
+        iconProps={{
+          size: 16,
+        }}
+      >
+        {labelFollow}
+      </Button>
+    </ElementWrapper>
   );
 }
