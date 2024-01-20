@@ -14,6 +14,11 @@ class UserService {
         username,
         imageUrl,
         externalUserId,
+        stream: {
+          create: {
+            name: `${username}'s Stream`,
+          },
+        },
       },
     });
   }
