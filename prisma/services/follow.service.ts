@@ -2,6 +2,27 @@ import { db } from "@/lib/db";
 import AuthService from "./auth.service";
 
 class FollowService {
+  static async getFollowingList() {
+    try {
+      const self = await AuthService.getSelf();
+
+      const followingList = await db.follow.findMany({
+        where: {
+          followerId: self.id,
+        },
+        orderBy: {
+          createAt: "desc",
+        },
+        include: {
+          following: true,
+        },
+      });
+
+      return followingList;
+    } catch {
+      return [];
+    }
+  }
   static async isFollowingUser(id: string) {
     try {
       const self = await AuthService.getSelf();

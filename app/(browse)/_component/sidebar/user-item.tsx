@@ -39,7 +39,7 @@ export default function UserItem({
       )}
       asChild
     >
-      <Link href={href}>
+      <Link className="w-full h-12" href={href}>
         <div
           className={cn(
             "flex items-center w-full gap-x-4",

@@ -1,16 +1,16 @@
 "use client";
 import Hint from "@/components/client/hint";
 import { useSidebar } from "@/store";
-import { User } from "@prisma/client";
-import { VideoIcon } from "lucide-react";
+import { Follow, User } from "@prisma/client";
+import { HeartIcon } from "lucide-react";
 import UserItem, { UserItemSkeleton } from "./user-item";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export interface RecommendedProps {
-  data: User[];
+export interface FollowProps {
+  data: (Follow & { following: User })[];
 }
 
-export default function Recommended({ data }: RecommendedProps) {
+export default function Follow({ data }: FollowProps) {
   const { collapsed } = useSidebar((state) => state);
 
   const showLabel = !collapsed && data.length > 0;
@@ -22,22 +22,20 @@ export default function Recommended({ data }: RecommendedProps) {
   return (
     <div className="flex flex-col">
       {showLabel ? (
-        <p className="uppercase text-sm font-semibold truncate">
-          Recommended List
-        </p>
+        <p className="uppercase text-sm font-semibold truncate">Follow List</p>
       ) : (
-        <Hint asChild label="Recommended List" align="center" side="right">
-          <VideoIcon className="text-muted-foreground ml-3" size={20} />
+        <Hint asChild label="Follow List" align="center" side="right">
+          <HeartIcon className="text-muted-foreground ml-3" size={20} />
         </Hint>
       )}
 
       <ul className="space-y-2 py-4">
-        {data.map((user) => (
+        {data.map((follow) => (
           <UserItem
-            key={user.id}
-            username={user.username}
+            key={follow.following.id}
+            username={follow.following.username}
             isLive={true}
-            imageUrl={user.imageUrl}
+            imageUrl={follow.following.imageUrl}
           />
         ))}
       </ul>
@@ -45,7 +43,7 @@ export default function Recommended({ data }: RecommendedProps) {
   );
 }
 
-export function RecommendSkeleton() {
+export function FollowSkeleton() {
   return (
     <div className="flex flex-col max-lg:items-center p-3">
       <Skeleton className="h-8 w-8 max-lg:rounded-md lg:w-48" />
