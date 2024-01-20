@@ -1,5 +1,6 @@
 "use client";
 
+import { onBlock, onUnblock } from "@/actions/block";
 import { onFollow, onUnFollow } from "@/actions/follow";
 import Hint from "@/components/client/hint";
 import { Button } from "@/components/ui/button";
@@ -10,11 +11,17 @@ import { toast } from "sonner";
 
 export interface ActionsProps {
   isFollowing: boolean;
+  isBlocked: boolean;
   userId: string;
 }
 
-export default function Actions({ isFollowing, userId }: ActionsProps) {
+export default function Actions({
+  isFollowing,
+  isBlocked,
+  userId,
+}: ActionsProps) {
   const labelFollow = isFollowing ? "Unfollow" : "Follow";
+  const labelBlockUser = isBlocked ? "Unblock" : "Block";
 
   const [isPending, startTransition] = useTransition();
 
@@ -36,11 +43,41 @@ export default function Actions({ isFollowing, userId }: ActionsProps) {
     });
   };
 
-  const handleOnClick = () => {
-    if (isFollowing) {
-      handleUnFollow();
-    } else {
-      handleFollow();
+  const handleBlock = () => {
+    startTransition(() => {
+      onBlock(userId)
+        .then((res) => toast.success(`Blocked ${res.blocked.username}`))
+        .catch((error) => toast.error(error.message));
+    });
+  };
+
+  const handleUnblock = () => {
+    startTransition(() => {
+      onUnblock(userId)
+        .then((res) => toast.success(`Unblocked ${res.blocked.username}`))
+        .catch((error) => toast.error(error.message));
+    });
+  };
+
+  const handleOnClick = (type: "follow" | "block") => {
+    switch (type) {
+      case "follow":
+        if (isFollowing) {
+          handleUnFollow();
+        } else {
+          handleFollow();
+        }
+        break;
+      case "block":
+        if (isBlocked) {
+          handleUnblock();
+        } else {
+          handleBlock();
+        }
+        break;
+
+      default:
+        break;
     }
   };
 
@@ -51,23 +88,44 @@ export default function Actions({ isFollowing, userId }: ActionsProps) {
   const ElementWrapper = user.username === username ? Hint : Fragment;
 
   return (
-    <ElementWrapper
-      side="bottom"
-      label={"Can't follow yourself"}
-      className="w-full"
-    >
-      <Button
-        className="font-semibold text-xs w-full"
-        onClick={handleOnClick}
-        loading={isPending}
-        iconSize={"lucide"}
-        disabled={user.username === username}
-        iconProps={{
-          size: 16,
-        }}
+    <>
+      <ElementWrapper
+        side="bottom"
+        label={"Can't follow yourself"}
+        className="w-full"
       >
-        {labelFollow}
-      </Button>
-    </ElementWrapper>
+        <Button
+          className="font-semibold text-xs w-full"
+          onClick={() => handleOnClick("follow")}
+          loading={isPending}
+          iconSize={"lucide"}
+          disabled={user.username === username}
+          iconProps={{
+            size: 16,
+          }}
+        >
+          {labelFollow}
+        </Button>
+      </ElementWrapper>
+      <ElementWrapper
+        side="bottom"
+        label={"Can't block yourself"}
+        className="w-full"
+      >
+        <Button
+          className="font-semibold text-xs w-full"
+          onClick={() => handleOnClick("block")}
+          loading={isPending}
+          iconSize={"lucide"}
+          disabled={user.username === username}
+          iconProps={{
+            size: 16,
+          }}
+          variant={"destructive"}
+        >
+          {labelBlockUser}
+        </Button>
+      </ElementWrapper>
+    </>
   );
 }

@@ -12,7 +12,7 @@ const onFollow = async (id: string) => {
 
     if (followedUser) {
       revalidatePath(
-        BROWSE_ROUTES.PUBLIC.USER_PROFILE(followedUser.following.id)
+        BROWSE_ROUTES.PUBLIC.USER_PROFILE(followedUser.following.username)
       );
     }
 
@@ -30,7 +30,7 @@ const onUnFollow = async (id: string) => {
 
     if (unFollowUser) {
       revalidatePath(
-        BROWSE_ROUTES.PUBLIC.USER_PROFILE(unFollowUser.following.id)
+        BROWSE_ROUTES.PUBLIC.USER_PROFILE(unFollowUser.following.username)
       );
     }
 

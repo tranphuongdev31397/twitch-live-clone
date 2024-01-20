@@ -66,6 +66,15 @@ class UserService {
                 },
               },
             },
+            {
+              NOT: {
+                blocking: {
+                  some: {
+                    blockedId: userId,
+                  },
+                },
+              },
+            },
           ],
         },
         orderBy: {
