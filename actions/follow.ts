@@ -1,12 +1,12 @@
 "use server";
 
-import UserService from "@/prisma/services/user.service";
+import FollowService from "@/prisma/services/follow.service";
 import { BROWSE_ROUTES } from "@/routes/browse";
 import { revalidatePath } from "next/cache";
 
 const onFollow = async (id: string) => {
   try {
-    const followedUser = await UserService.follow(id);
+    const followedUser = await FollowService.follow(id);
 
     revalidatePath(BROWSE_ROUTES.PUBLIC.HOME);
 
@@ -24,7 +24,7 @@ const onFollow = async (id: string) => {
 
 const onUnFollow = async (id: string) => {
   try {
-    const unFollowUser = await UserService.unfollow(id);
+    const unFollowUser = await FollowService.unfollow(id);
 
     revalidatePath(BROWSE_ROUTES.PUBLIC.HOME);
 
