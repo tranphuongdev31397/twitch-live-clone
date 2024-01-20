@@ -18,7 +18,7 @@ class FollowService {
           },
         },
         orderBy: {
-          createAt: "desc",
+          createdAt: "desc",
         },
         include: {
           following: true,

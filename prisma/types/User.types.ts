@@ -1,5 +1,14 @@
-import { User } from "@prisma/client";
+type Stream = {
+  create: {
+    name: string;
+  };
+};
 
-type CreateUserParams = Pick<User, "username" | "imageUrl" | "externalUserId">;
+type CreateUserParams = {
+  username: string;
+  imageUrl: string;
+  externalUserId: string;
+  stream: Stream;
+};
 
 export type { CreateUserParams };

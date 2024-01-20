@@ -20,7 +20,7 @@ export default function Hint({
   children,
   side = "top",
   align = "center",
-  disabled = true,
+  disabled = false,
   asChild,
   className,
 }: HintProps) {

@@ -19,11 +19,11 @@ export default async function Actions(props: ActionsProps) {
           <Button
             variant="ghost"
             size="sm"
-            className="flex items-center flex-start text-muted-foreground hover:text-primary"
+            className="flex flex-row items-center flex-start text-muted-foreground hover:text-primary"
             asChild
+            startIcon={Clapperboard}
           >
             <Link href={`u/${user.username}`}>
-              <Clapperboard size="20" className="lg:mr-2" />
               <span className="hidden lg:block">Dashboard</span>
             </Link>
           </Button>

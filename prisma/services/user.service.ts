@@ -78,13 +78,13 @@ class UserService {
           ],
         },
         orderBy: {
-          createAt: "desc",
+          createdAt: "desc",
         },
       });
     } else {
       users = await db.user.findMany({
         orderBy: {
-          createAt: "desc",
+          createdAt: "desc",
         },
       });
     }

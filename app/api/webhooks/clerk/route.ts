@@ -63,6 +63,11 @@ export async function POST(req: Request) {
         username,
         imageUrl: image_url,
         externalUserId: idClerk,
+        stream: {
+          create: {
+            name: `${username}'s Stream`,
+          },
+        },
       });
       break;
     case "user.updated":
