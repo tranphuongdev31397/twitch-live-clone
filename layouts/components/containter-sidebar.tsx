@@ -5,11 +5,11 @@ import { useSidebar } from "@/store";
 import { useEffect } from "react";
 import { useMediaQuery } from "usehooks-ts";
 
-export interface ContainerProps {
+export interface ContainerSidebarProps {
   children: React.ReactNode;
 }
 
-export default function Container({ children }: ContainerProps) {
+export default function ContainerSidebar({ children }: ContainerSidebarProps) {
   const matches = useMediaQuery(BREAKPOINTS.MAX_LG);
   const { collapsed, onTrigger } = useSidebar((state) => state);
 

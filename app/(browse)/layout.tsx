@@ -1,8 +1,8 @@
 import * as React from "react";
 import Navbar from "./_component/navbar";
-import Sidebar from "./_component/sidebar";
-import Container from "./_component/containter";
-import { WrapperSkeleton } from "./_component/sidebar/wrapper";
+import Sidebar, { SidebarChildrenLoading } from "./_component/sidebar";
+import { WrapperSidebarSkeleton } from "@/layouts/components/wrapper-sidebar";
+import ContainerSidebar from "@/layouts/components/containter-sidebar";
 export interface BrowseLayoutProps {
   children: React.ReactNode;
 }
@@ -12,10 +12,16 @@ export default function BrowseLayout({ children }: BrowseLayoutProps) {
     <>
       <Navbar />
       <div className="flex pt-20 h-full browse-root">
-        <React.Suspense fallback={<WrapperSkeleton />}>
+        <React.Suspense
+          fallback={
+            <WrapperSidebarSkeleton
+              loadingChildren={<SidebarChildrenLoading />}
+            />
+          }
+        >
           <Sidebar />
         </React.Suspense>
-        <Container>{children}</Container>
+        <ContainerSidebar>{children}</ContainerSidebar>
       </div>
     </>
   );

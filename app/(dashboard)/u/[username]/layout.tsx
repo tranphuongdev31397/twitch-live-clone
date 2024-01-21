@@ -2,6 +2,10 @@ import AuthService from "@/prisma/services/auth.service";
 import Navbar from "./_components/navbar";
 import { redirect } from "next/navigation";
 import { BROWSE_ROUTES } from "@/routes/browse";
+import React from "react";
+import { WrapperSidebarSkeleton } from "@/layouts/components/wrapper-sidebar";
+import Sidebar from "./_components/sidebar";
+import ContainerSidebar from "@/layouts/components/containter-sidebar";
 
 export interface CreatorLayoutProps {
   children: React.ReactNode;
@@ -26,11 +30,12 @@ export default async function CreatorLayout({
     <>
       <Navbar />
       <div className="flex pt-20 h-full browse-root">
-        {/* <React.Suspense fallback={<WrapperSkeleton />}>
+        <React.Suspense
+          fallback={<WrapperSidebarSkeleton loadingChildren={<></>} />}
+        >
           <Sidebar />
         </React.Suspense>
-        <Container>{children}</Container> */}
-        {children}
+        <ContainerSidebar>{children}</ContainerSidebar>
       </div>
     </>
   );
