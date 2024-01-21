@@ -24,7 +24,7 @@ export default function ContainerSidebar({ children }: ContainerSidebarProps) {
   return (
     <div
       className={cn(
-        "transition-all duration-500",
+        "transition-all duration-500 w-full",
         collapsed ? "ml-min-sidebar" : "ml-min-sidebar lg:ml-max-sidebar"
       )}
     >

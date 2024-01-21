@@ -1,7 +1,7 @@
 const BROWSE_ROUTES = {
   PUBLIC: {
     HOME: "/",
-    USER_PROFILE: (username: string = ":username") => `/${username}`,
+    USERNAME: (username: string = ":username") => `/${username}`,
   },
   PRIVATE: {},
 };

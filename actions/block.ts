@@ -13,7 +13,7 @@ const onBlock = async (id: string) => {
 
     if (blockedUser) {
       revalidatePath(
-        BROWSE_ROUTES.PUBLIC.USER_PROFILE(blockedUser.blocked.username)
+        BROWSE_ROUTES.PUBLIC.USERNAME(blockedUser.blocked.username)
       );
     }
 
@@ -31,7 +31,7 @@ const onUnblock = async (id: string) => {
 
     if (unBlockedUser) {
       revalidatePath(
-        BROWSE_ROUTES.PUBLIC.USER_PROFILE(unBlockedUser.blocked.username)
+        BROWSE_ROUTES.PUBLIC.USERNAME(unBlockedUser.blocked.username)
       );
     }
 
