@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { BROWSE_ROUTES } from "@/routes/browse";
 import { DASHBOARD_ROUTES } from "@/routes/dashboard";
 import { SignInButton, UserButton, currentUser } from "@clerk/nextjs";
-import { Clapperboard } from "lucide-react";
+import { Clapperboard, Undo2 } from "lucide-react";
 import Link from "next/link";
 export interface ActionsProps {}
 
@@ -17,14 +17,14 @@ export default async function Actions(props: ActionsProps) {
       )}
       {!!user && (
         <div className="flex items-center gap-x-4">
-          <Link href={DASHBOARD_ROUTES.PRIVATE.STREAM(user?.username || "")}>
+          <Link href={BROWSE_ROUTES.PUBLIC.HOME}>
             <Button
               variant="ghost"
               size="sm"
-              className="flex flex-row items-center flex-start text-muted-foreground hover:text-primary"
-              startIcon={Clapperboard}
+              className="flex cursor-pointer flex-row items-center flex-start text-muted-foreground hover:text-primary"
+              startIcon={Undo2}
             >
-              <span className="hidden lg:block">Dashboard</span>
+              <span className="hidden lg:block">Exit</span>
             </Button>
           </Link>
 

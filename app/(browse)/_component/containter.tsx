@@ -12,6 +12,7 @@ export interface ContainerProps {
 export default function Container({ children }: ContainerProps) {
   const matches = useMediaQuery(BREAKPOINTS.MAX_LG);
   const { collapsed, onTrigger } = useSidebar((state) => state);
+
   useEffect(() => {
     if (matches) {
       onTrigger(true);

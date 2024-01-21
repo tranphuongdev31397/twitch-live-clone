@@ -70,7 +70,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       loading,
       startIcon,
       endIcon,
-      disabled,
+      disabled = false,
       loadingPosition = "start",
       children,
       iconProps,
