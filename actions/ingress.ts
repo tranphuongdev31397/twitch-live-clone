@@ -13,7 +13,6 @@ import {
 } from "livekit-server-sdk";
 
 import { TrackSource } from "livekit-server-sdk/dist/proto/livekit_models";
-import { forEach } from "lodash";
 import { revalidatePath } from "next/cache";
 
 const roomService = new RoomServiceClient(

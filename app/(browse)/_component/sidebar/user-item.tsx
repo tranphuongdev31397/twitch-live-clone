@@ -20,7 +20,7 @@ export interface UserItemProps {
 export default function UserItem({
   username,
   imageUrl,
-  isLive = false,
+  isLive,
 }: UserItemProps) {
   const pathname = usePathname();
 
@@ -39,7 +39,7 @@ export default function UserItem({
       )}
       asChild
     >
-      <Link className="w-full h-12" href={href}>
+      <Link className="flex items-center w-full h-12" href={href}>
         <div
           className={cn(
             "flex items-center w-full gap-x-4",

@@ -1,13 +1,17 @@
 "use client";
 import Hint from "@/components/client/hint";
 import { useSidebar } from "@/store";
-import { Follow, User } from "@prisma/client";
+import { Follow, Stream, User } from "@prisma/client";
 import { HeartIcon } from "lucide-react";
 import UserItem, { UserItemSkeleton } from "./user-item";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export interface FollowProps {
-  data: (Follow & { following: User })[];
+  data: (Follow & {
+    following: User & {
+      stream: Stream | null;
+    };
+  })[];
 }
 
 export default function Follow({ data }: FollowProps) {
@@ -34,7 +38,7 @@ export default function Follow({ data }: FollowProps) {
           <UserItem
             key={follow.following.id}
             username={follow.following.username}
-            isLive={true}
+            isLive={follow.following.stream?.isLive}
             imageUrl={follow.following.imageUrl}
           />
         ))}

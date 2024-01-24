@@ -1,13 +1,13 @@
 "use client";
 import Hint from "@/components/client/hint";
 import { useSidebar } from "@/store";
-import { User } from "@prisma/client";
+import { Stream, User } from "@prisma/client";
 import { VideoIcon } from "lucide-react";
 import UserItem, { UserItemSkeleton } from "./user-item";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export interface RecommendedProps {
-  data: User[];
+  data: (User & { stream: Stream | null })[];
 }
 
 export default function Recommended({ data }: RecommendedProps) {
@@ -36,7 +36,7 @@ export default function Recommended({ data }: RecommendedProps) {
           <UserItem
             key={user.id}
             username={user.username}
-            isLive={true}
+            isLive={user.stream?.isLive}
             imageUrl={user.imageUrl}
           />
         ))}
