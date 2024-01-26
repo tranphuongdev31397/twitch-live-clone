@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export interface FollowProps {
   data: (Follow & {
     following: User & {
-      stream: Stream | null;
+      stream: { isLive: boolean } | null;
     };
   })[];
 }

@@ -7,7 +7,11 @@ import UserItem, { UserItemSkeleton } from "./user-item";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export interface RecommendedProps {
-  data: (User & { stream: Stream | null })[];
+  data: (User & {
+    stream: {
+      isLive: boolean;
+    } | null;
+  })[];
 }
 
 export default function Recommended({ data }: RecommendedProps) {

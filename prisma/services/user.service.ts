@@ -83,7 +83,11 @@ class UserService {
           ],
         },
         include: {
-          stream: true,
+          stream: {
+            select: {
+              isLive: true,
+            },
+          },
         },
         orderBy: {
           createdAt: "desc",
@@ -92,7 +96,11 @@ class UserService {
     } else {
       users = await db.user.findMany({
         include: {
-          stream: true,
+          stream: {
+            select: {
+              isLive: true,
+            },
+          },
         },
         orderBy: {
           createdAt: "desc",
