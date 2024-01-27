@@ -22,22 +22,22 @@ export default function NavItem({
 }: NavItemProps) {
   const { collapsed } = useSidebar((state) => state);
   return (
-    <Button
-      variant="ghost"
-      className={cn(
-        "w-full h-12",
-        collapsed ? "justify-center" : "justify-start",
-        isActive && "bg-accent"
-      )}
-      asChild
-    >
-      <Link className="w-full" href={href}>
+    <Link className="w-full" href={href}>
+      <Button
+        variant="ghost"
+        className={cn(
+          "w-full h-12",
+          collapsed ? "justify-center" : "justify-start",
+          isActive && "bg-accent"
+        )}
+        asChild
+      >
         <div className={cn("flex items-center gap-x-4")}>
           <Icon size={16} />
           {!collapsed && <span>{label}</span>}
         </div>
-      </Link>
-    </Button>
+      </Button>
+    </Link>
   );
 }
 
