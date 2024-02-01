@@ -1,0 +1,3 @@
+const CHAT_DELAY_TIME = 3000;
+
+export { CHAT_DELAY_TIME };
