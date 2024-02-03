@@ -11,6 +11,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import ChatHeader from "./chat-header";
 import ChatForm from "./chat-form";
+import ChatList from "./chat-list";
 
 export interface ChatProps {
   viewerName: string;
@@ -61,8 +62,8 @@ export default function Chat({
   return (
     <div className="flex flex-col bg-background border-l border-b pt-0 h-[calc(100vh-80px)]">
       <ChatHeader />
-      <div className="flex-1 overflow-auto h-[1000px]">
-        <div className="h-[1000px]"></div>
+      <div className="flex-1 overflow-auto">
+        <ChatList messages={messageReversed} isHidden={isHidden} />
       </div>
       <ChatForm
         onSubmit={onSubmit}
