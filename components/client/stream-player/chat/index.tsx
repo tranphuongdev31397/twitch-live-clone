@@ -1,6 +1,6 @@
 "use client";
 import { BREAKPOINTS } from "@/configs/breakpoint";
-import { useChatSidebar } from "@/store/use-chat-sidebar";
+import { EVariant, useChatSidebar } from "@/store/use-chat-sidebar";
 import {
   useChat,
   useConnectionState,
@@ -9,9 +9,11 @@ import {
 import { ConnectionState } from "livekit-client";
 import { useEffect, useMemo, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import ChatHeader from "./chat-header";
-import ChatForm from "./chat-form";
+import ChatHeader, { ChatHeaderSkeleton } from "./chat-header";
+import ChatForm, { ChatFormSkeleton } from "./chat-form";
 import ChatList from "./chat-list";
+import ChatCommunity from "./chat-community";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface ChatProps {
   viewerName: string;
@@ -62,18 +64,41 @@ export default function Chat({
   return (
     <div className="flex flex-col bg-background border-l border-b pt-0 h-[calc(100vh-80px)]">
       <ChatHeader />
-      <div className="flex-1 overflow-auto">
-        <ChatList messages={messageReversed} isHidden={isHidden} />
-      </div>
-      <ChatForm
-        onSubmit={onSubmit}
-        value={value}
-        onChange={(text) => setValue(text)}
-        isHidden={isHidden}
-        isFollowersOnly={isChatFollowersOnly}
-        isFollowing={isFollowing}
-        isDelayed={isChatDelayed}
-      />
+      {variant === EVariant.Chat && (
+        <>
+          <div className="flex-1 overflow-auto">
+            <ChatList messages={messageReversed} isHidden={isHidden} />
+          </div>
+          <ChatForm
+            onSubmit={onSubmit}
+            value={value}
+            onChange={(text) => setValue(text)}
+            isHidden={isHidden}
+            isFollowersOnly={isChatFollowersOnly}
+            isFollowing={isFollowing}
+            isDelayed={isChatDelayed}
+          />
+        </>
+      )}
+      {variant === EVariant.Community && (
+        <ChatCommunity
+          isHidden={isHidden}
+          hostName={hostName}
+          viewerName={viewerName}
+        />
+      )}
     </div>
   );
 }
+
+export const ChatSkeleton = () => {
+  return (
+    <div className="flex flex-col bg-background border-l border-b pt-0 h-[calc(100vh-80px)]">
+      <ChatHeaderSkeleton />
+      <div className="flex-1 flex justify-center items-center">
+        <Skeleton className="h-4 w-3/5" />
+      </div>
+      <ChatFormSkeleton />
+    </div>
+  );
+};

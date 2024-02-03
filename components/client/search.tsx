@@ -11,12 +11,14 @@ export interface SearchProps {
   onSubmit?: (value: string) => void;
   onChange?: (value: string) => void;
   pushUrl?: string;
+  placeholder?: string;
 }
 
 export default function Search({
   onSubmit: externalOnSubmit,
   onChange: externalOnChange,
   pushUrl,
+  placeholder = "Search...",
 }: Readonly<SearchProps>) {
   const [searchValue, setSearchValue] = useState<string>("");
 
@@ -60,7 +62,7 @@ export default function Search({
     >
       <div className="relative w-full">
         <Input
-          placeholder="Search"
+          placeholder={placeholder}
           value={searchValue}
           className="rounded-r-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 pr-8"
           onChange={(e) => {
@@ -81,6 +83,7 @@ export default function Search({
         className="rounded-l-none"
         type="submit"
         size="sm"
+        disabled={!externalOnSubmit}
       >
         <SearchIcon size={18} />
       </Button>

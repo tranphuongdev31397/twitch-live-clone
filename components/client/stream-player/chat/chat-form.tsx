@@ -7,6 +7,7 @@ import { SendIcon } from "lucide-react";
 import { FormEvent, useState } from "react";
 import ChatInfo from "./chat-info";
 import { CHAT_DELAY_TIME } from "./chat.config";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface ChatFormProps {
   onSubmit: () => void;
@@ -76,3 +77,11 @@ export default function ChatForm({
     </form>
   );
 }
+
+export const ChatFormSkeleton = () => {
+  return (
+    <div className="p-3">
+      <Skeleton className="w-full h-6" />
+    </div>
+  );
+};
