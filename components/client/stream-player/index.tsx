@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useChatSidebar } from "@/store/use-chat-sidebar";
 import Chat, { ChatSkeleton } from "./chat";
 import ChatToggle from "./chat/chat-toggle";
+import StreamHeader, { StreamHeaderSkeleton } from "./stream-header";
 
 export interface StreamPlayerProps {
   user: User & { stream: Stream | null };
@@ -47,6 +48,14 @@ export default function StreamPlayer({
       >
         <div className="relative space-y-4 pb-10 col-span-1 lg:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar">
           <Video hostName={user.username} hostIdentity={user.id} />
+          <StreamHeader
+            streamName={stream.name}
+            hostIdentity={user.id}
+            hostName={user.username}
+            imageUrl={user.imageUrl}
+            viewerIdentity={identity}
+            isFollowing={isFollowing}
+          />
         </div>
         <div
           className={cn("col-span-1", {
@@ -77,6 +86,7 @@ export const StreamPlayerSkeleton = () => {
     >
       <div className="relative space-y-4 pb-10 col-span-1 lg:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar">
         <VideoSkeleton />
+        <StreamHeaderSkeleton />
       </div>
       <div className="col-span-1">
         <ChatSkeleton />
