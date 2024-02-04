@@ -23,13 +23,19 @@ const onSettingStream = async (values: Partial<Stream>) => {
     const validData: Partial<
       Pick<
         Stream,
-        "name" | "isChatDelayed" | "isChatEnabled" | "isChatFollowersOnly"
+        | "name"
+        | "isChatDelayed"
+        | "isChatEnabled"
+        | "isChatFollowersOnly"
+        | "name"
+        | "thumbnailUrl"
       >
     > = {
       name: values.name,
       isChatEnabled: values.isChatEnabled,
       isChatDelayed: values.isChatDelayed,
       isChatFollowersOnly: values.isChatFollowersOnly,
+      thumbnailUrl: values.thumbnailUrl,
     };
 
     const streamUpdated = await db.stream.update({

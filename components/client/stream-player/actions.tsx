@@ -43,6 +43,7 @@ export default function Actions({ isFollowing, isHost, hostId }: ActionsProps) {
   };
   return (
     <Button
+      variant={"teal"}
       className="group lg:w-auto w-full font-bold"
       onClick={() => {
         startTransition(() => {
@@ -53,8 +54,8 @@ export default function Actions({ isFollowing, isHost, hostId }: ActionsProps) {
     >
       <HeartIcon
         className={cn(
-          "group-hover:fill-black group-hover:scale-110 transition-all",
-          isFollowing ? "fill-black" : ""
+          "group-hover:fill-white group-hover:scale-110 transition-all",
+          isFollowing ? "fill-white" : ""
         )}
         size={"16"}
       />

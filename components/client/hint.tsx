@@ -24,6 +24,7 @@ export default function Hint({
   asChild,
   className,
 }: HintProps) {
+  if (disabled) return children;
   return (
     <TooltipProvider>
       <Tooltip delayDuration={0}>
