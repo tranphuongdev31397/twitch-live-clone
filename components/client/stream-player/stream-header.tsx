@@ -52,7 +52,7 @@ export default function StreamHeader({
             </span>
           </div>
           <p className="text-sm text-muted-foreground">{streamName}</p>
-          <div className="flex items-center gap-x-2 text-emerald-300">
+          <div className="flex items-center gap-x-2 text-teal-400">
             <EyeIcon size={16} />
             <p className="font-semibold text-xs">{viewersCount} view(s)</p>
           </div>
