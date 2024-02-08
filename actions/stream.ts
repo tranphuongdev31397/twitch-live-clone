@@ -27,7 +27,6 @@ const onSettingStream = async (values: Partial<Stream>) => {
         | "isChatDelayed"
         | "isChatEnabled"
         | "isChatFollowersOnly"
-        | "name"
         | "thumbnailUrl"
       >
     > = {

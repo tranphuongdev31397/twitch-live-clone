@@ -12,7 +12,7 @@ export default function useViewerToken(hostIdentity: string) {
     try {
       const viewerToken = await createViewerToken(hostIdentity);
       setToken(viewerToken);
-      const decodedToken = jwtDecode(viewerToken) as JwtPayload & {
+      const decodedToken = jwtDecode(viewerToken) satisfies JwtPayload & {
         name?: string;
       };
       const name = decodedToken?.name;
