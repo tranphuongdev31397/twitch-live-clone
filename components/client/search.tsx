@@ -6,12 +6,14 @@ import { useRouter } from "next/navigation";
 import queryString from "query-string";
 import { SearchIcon, X } from "lucide-react";
 import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 export interface SearchProps {
   onSubmit?: (value: string) => void;
   onChange?: (value: string) => void;
   pushUrl?: string;
   placeholder?: string;
+  className?: string;
 }
 
 export default function Search({
@@ -19,6 +21,7 @@ export default function Search({
   onChange: externalOnChange,
   pushUrl,
   placeholder = "Search...",
+  className,
 }: Readonly<SearchProps>) {
   const [searchValue, setSearchValue] = useState<string>("");
 
@@ -57,7 +60,7 @@ export default function Search({
 
   return (
     <form
-      className="w-full lg:w-[400px] flex items-center"
+      className={cn("w-full lg:w-[400px] flex items-center", className)}
       onSubmit={handleOnSubmit}
     >
       <div className="relative w-full">
@@ -79,7 +82,7 @@ export default function Search({
       </div>
 
       <Button
-        variant={"secondary"}
+        variant={"teal"}
         className="rounded-l-none"
         type="submit"
         size="sm"

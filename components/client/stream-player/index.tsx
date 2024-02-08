@@ -94,7 +94,7 @@ export const StreamPlayerSkeleton = () => {
       <div className="relative space-y-4 pb-10 col-span-1 lg:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar">
         <VideoSkeleton />
         <StreamHeaderSkeleton />
-        <InfoStreamSkeleton />
+        {/* <InfoStreamSkeleton /> */}
       </div>
       <div className="col-span-1">
         <ChatSkeleton />

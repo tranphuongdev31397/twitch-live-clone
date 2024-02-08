@@ -36,7 +36,7 @@ export default function ChatForm({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    if (isDisabled && !isDelayBlocked) {
+    if (!isDisabled && isDelayed) {
       setIsDelayBlocked(true);
       setTimeout(() => {
         setIsDelayBlocked(false);
@@ -59,7 +59,7 @@ export default function ChatForm({
             onChange(e.target.value);
           }}
           placeholder="Send a message..."
-          disabled={isDisabled}
+          disabled={isDisabled || isDelayBlocked}
           className={cn(
             "border-white/10 border-r-0 rounded-r-none focus-visible:ring-transparent"
           )}
@@ -68,7 +68,7 @@ export default function ChatForm({
           className="flex justify-center items-center border-l-0 w-[55px] rounded-l-none"
           size={"icon"}
           variant={"default"}
-          disabled={isDisabled}
+          disabled={isDisabled || isDelayBlocked}
           type="submit"
         >
           <SendIcon size={"16"} />

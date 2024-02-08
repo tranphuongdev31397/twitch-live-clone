@@ -42,6 +42,7 @@ export default function ChatCommunity({
   return (
     <div className="p-3">
       <Search
+        className="lg:w-full"
         placeholder="Search community"
         onChange={(search) => setValue(search)}
       />
