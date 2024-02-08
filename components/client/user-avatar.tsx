@@ -1,3 +1,5 @@
+"use client";
+
 import { UserItemProps } from "@/app/(browse)/_component/sidebar/user-item";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";

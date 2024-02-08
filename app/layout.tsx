@@ -28,7 +28,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <ThemeProvider
             attribute="class"
-            forcedTheme="dark"
+            defaultTheme="dark"
             storageKey="gamehub-theme"
           >
             <Toaster theme="light" position="bottom-center" />
