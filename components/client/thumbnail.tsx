@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import { ReactNode } from "react";
 import BadgeLive from "./badge-live";
+import { Skeleton } from "../ui/skeleton";
 
 export interface ThumbnailProps {
   src?: string | null;
@@ -30,11 +31,11 @@ export default function Thumbnail({
       style={{
         background: bgColor,
       }}
-      className={cn("w-full aspect-video relative rounded-lg", className)}
+      className={cn("w-full group aspect-video relative rounded-lg", className)}
     >
       <div
         className={cn(
-          "w-full  rounded-lg h-full absolute top-0 left-0 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform bg-background flex justify-center items-center",
+          "w-full overflow-hidden  rounded-lg h-full absolute top-0 left-0 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform bg-background flex justify-center items-center",
           isLive ? "ring-teal-600  ring-[1px]" : ""
         )}
       >
@@ -53,3 +54,7 @@ export default function Thumbnail({
     </div>
   );
 }
+
+export const ThumbnailSekeleton = () => {
+  return <Skeleton className="w-full group aspect-video relative rounded-lg" />;
+};

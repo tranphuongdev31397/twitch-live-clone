@@ -6,4 +6,5 @@ export interface StreamFeed {
   name: string;
   thumbnailUrl: string | null;
   isLive: boolean;
+  updatedAt?: string;
 }

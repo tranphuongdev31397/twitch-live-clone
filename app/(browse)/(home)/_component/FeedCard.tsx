@@ -1,8 +1,13 @@
+"use client";
 import * as React from "react";
 import { StreamFeed } from "../interface";
 import Link from "next/link";
-import { UserAvatar } from "@/components/client/user-avatar";
-import Thumbnail from "@/components/client/thumbnail";
+import {
+  UserAvatar,
+  UserAvatarSkeleton,
+} from "@/components/client/user-avatar";
+import Thumbnail, { ThumbnailSekeleton } from "@/components/client/thumbnail";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface FeedCardProps {
   stream: StreamFeed;
@@ -36,3 +41,18 @@ export default function FeedCard({ stream }: FeedCardProps) {
     </Link>
   );
 }
+
+export const FeedCardSkeleton = () => {
+  return (
+    <div className="h-full w-full space-y-2 group">
+      <ThumbnailSekeleton />
+      <div className="flex flex-row p-2 gap-x-4 w-full truncate">
+        <UserAvatarSkeleton />
+        <div className="max-w-full w-full flex-1 truncate">
+          <Skeleton className="rounded-none h-6 w-40" />
+          <Skeleton className="rounded-none h-4 w-20" />
+        </div>
+      </div>
+    </div>
+  );
+};

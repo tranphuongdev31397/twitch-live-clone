@@ -40,7 +40,7 @@ export default function Search({
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!!pushUrl) {
+    if (pushUrl) {
       const url = queryString.stringifyUrl(
         {
           url: pushUrl,
@@ -53,6 +53,7 @@ export default function Search({
         }
       );
       router.push(url);
+      return;
     }
 
     externalOnSubmit?.(searchValue);
@@ -86,7 +87,6 @@ export default function Search({
         className="rounded-l-none"
         type="submit"
         size="sm"
-        disabled={!externalOnSubmit}
       >
         <SearchIcon size={18} />
       </Button>
