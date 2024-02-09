@@ -32,11 +32,11 @@ export default function Navigation(props: NavigationProps) {
       href: DASHBOARD_ROUTES.PRIVATE.CHAT(user?.username || ""),
       icon: MessageSquareIcon,
     },
-    {
-      label: "Community",
-      href: DASHBOARD_ROUTES.PRIVATE.COMMUNITY(user?.username || ""),
-      icon: UsersIcon,
-    },
+    // {
+    //   label: "Community",
+    //   href: DASHBOARD_ROUTES.PRIVATE.COMMUNITY(user?.username || ""),
+    //   icon: UsersIcon,
+    // },
   ];
   return (
     <ul className="space-y-2 px-2 pt-4 lg:pt-0">

@@ -1,7 +1,6 @@
 import FeedService from "@/prisma/services/feed.service";
 import { BROWSE_ROUTES } from "@/routes/browse";
 import { redirect } from "next/navigation";
-import FeedsContainer from "../(home)/_component/FeedContainer";
 import SearchResults from "./components/SearchResults";
 
 export interface SearchPageProps {

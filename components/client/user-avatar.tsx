@@ -45,11 +45,11 @@ export function UserAvatar({
           className
         )}
       >
-        <AvatarImage src={imageUrl} className="object-cover" />
         <AvatarFallback>
           {username[0]}
           {username[username.length - 1]}
         </AvatarFallback>
+        <AvatarImage src={imageUrl} className="object-cover" />
       </Avatar>
 
       {showLive && collapsed && (

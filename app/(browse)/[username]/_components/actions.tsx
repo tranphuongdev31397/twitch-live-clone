@@ -46,7 +46,7 @@ export default function Actions({
   const handleBlock = () => {
     startTransition(() => {
       onBlock(userId)
-        .then((res) => toast.success(`Blocked ${res.blocked.username}`))
+        .then((res) => toast.success(`Blocked ${res?.blocked.username}`))
         .catch((error) => toast.error(error.message));
     });
   };

@@ -3,7 +3,7 @@
 import FeedService from "@/prisma/services/feed.service";
 import FeedCard, { FeedCardSkeleton } from "./FeedCard";
 
-export default async function FeedsContainer() {
+export const FeedsContainer = async () => {
   const streams = await FeedService.getListFeeds();
 
   return (
@@ -13,7 +13,7 @@ export default async function FeedsContainer() {
       })}
     </div>
   );
-}
+};
 
 export const FeedContainerSkeleton = () => {
   return (

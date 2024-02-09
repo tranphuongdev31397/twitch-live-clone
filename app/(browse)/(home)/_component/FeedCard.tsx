@@ -48,7 +48,7 @@ export const FeedCardSkeleton = () => {
       <ThumbnailSekeleton />
       <div className="flex flex-row p-2 gap-x-4 w-full truncate">
         <UserAvatarSkeleton />
-        <div className="max-w-full w-full flex-1 truncate">
+        <div className="max-w-full w-full flex-1 space-y-1 truncate">
           <Skeleton className="rounded-none h-6 w-40" />
           <Skeleton className="rounded-none h-4 w-20" />
         </div>
